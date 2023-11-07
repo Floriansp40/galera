@@ -29,19 +29,23 @@ app.use('/formations', formation_router)
 app.all('*', (req, res) => res.status(501).send('What the hell are you doing'))
 
 /** Démarrage de l'API */
-mongoose
-    .connect(process.env.MONGODB_URL)
-    .then(() => {
-        console.log('MONGODB CNX OK')
 
-        DB.sequelize.authenticate()
-            .then(() => console.log('MariaDB CNX OK'))
-            .then(() => {
-                app.listen(process.env.API_PORT, () => {
-                    console.log("Wonderful your API is ready ...")
-                })
-            })
-            .catch(e => console.log('Database ERROR - MariaDB', e))
-    })
-    .catch(e => console.log('Database ERROR - MONGO', e))
+// mongoose
+//     .connect(process.env.MONGODB_URL)
+//     .then(() => {
+//         console.log('MONGODB CNX OK')
 
+//         DB.sequelize.authenticate()
+//             .then(() => console.log('MariaDB CNX OK'))
+//             .then(() => {
+//                 const server = app.listen(process.env.API_PORT, () => {
+//                     console.log("Wonderful your API is ready ...")
+//                 })
+//             })
+//             .catch(e => console.log('Database ERROR - MariaDB', e))
+//     })
+//     .catch(e => console.log('Database ERROR - MONGO', e))
+const server = app.listen(process.env.API_PORT, () => {
+    console.log("Wonderful your API is ready ...")
+})
+    module.exports = server
